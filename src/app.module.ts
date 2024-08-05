@@ -4,6 +4,7 @@ import * as process from "process";
 import {dbConnectionsConfig} from "./configs/ormconfig";
 import { DatabaseModule } from "./modules/database/database.module";
 import { AuthModule } from './modules/auth/auth.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -14,6 +15,7 @@ import { AuthModule } from './modules/auth/auth.module';
   }),
     DatabaseModule,
     AuthModule,
+    UserModule,
   ],
   controllers: [],
   providers: [],

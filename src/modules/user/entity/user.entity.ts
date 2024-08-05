@@ -15,6 +15,9 @@ export class UserEntity extends BaseEntity {
   @Column({ type: 'varchar', nullable: false })
   public password: string;
 
+  @Column({ type: 'int', nullable: false })
+  public age: number;
+
   @ManyToMany(() => UserEntity, user => user.friends)
   @JoinTable()
   public friends: UserEntity[];

@@ -6,6 +6,7 @@ import { DatabaseModule } from "./modules/database/database.module";
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
 import { FriendrequestModule } from './modules/friendrequest/friendrequest.module';
+import { FriendModule } from './modules/friend/friend.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -18,6 +19,7 @@ import { FriendrequestModule } from './modules/friendrequest/friendrequest.modul
     AuthModule,
     UserModule,
     FriendrequestModule,
+    FriendModule,
   ],
   controllers: [],
   providers: [],

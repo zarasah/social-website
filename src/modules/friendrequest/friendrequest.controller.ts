@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Param, ParseIntPipe, Post, UseGuards } from "@nestjs/common";
 import { FriendrequestService } from "./friendrequest.service";
 import { FriendRequestDto } from "./dto/friend.request.dto";
 import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
@@ -22,5 +22,17 @@ export class FriendrequestController {
   @UseGuards(JwtAuthGuard)
   async sendFriendRequest(@Body() friendRequestDto: FriendRequestDto, @User() user: UserEntity) {
     return this.friendRequestService.sendFriendRequest(friendRequestDto, user);
+  }
+
+  @Post('accept/:id')
+  @UseGuards(JwtAuthGuard)
+  async acceptFriendRequest(@User() user: UserEntity, @Param('id', ParseIntPipe) requestId: number) {
+    return this.friendRequestService.acceptFriendRequest(user, requestId);
+  }
+
+  @Post('decline/:id')
+  @UseGuards(JwtAuthGuard)
+  async declineFriendRequest(@User() user: UserEntity, @Param('id', ParseIntPipe) requestId: number) {
+    return this.friendRequestService.declineFriendRequest(user, requestId);
   }
 }

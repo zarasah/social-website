@@ -1,5 +1,7 @@
 import { BaseEntity } from "../../../common/entities/base.entity";
-import { Column, ManyToMany, JoinTable, Entity } from "typeorm";
+import { Column, OneToMany, Entity } from "typeorm";
+import { FriendRequestEntity } from "../../friendrequest/entity/friend.request.entity";
+import { FriendEntity } from "../../friend/entity/friend.entity";
 
 @Entity({name: 'user'})
 export class UserEntity extends BaseEntity {
@@ -15,7 +17,18 @@ export class UserEntity extends BaseEntity {
   @Column({ type: 'varchar', nullable: false })
   public password: string;
 
-  @ManyToMany(() => UserEntity, user => user.friends)
-  @JoinTable()
-  public friends: UserEntity[];
+  @Column({ type: 'int', nullable: false })
+  public age: number;
+
+  @OneToMany(() => FriendRequestEntity, (friendRequest) => friendRequest.sender)
+  sentFriendRequests: FriendRequestEntity[];
+
+  @OneToMany(() => FriendRequestEntity, (friendRequest) => friendRequest.receiver)
+  receivedFriendRequests: FriendRequestEntity[];
+
+  @OneToMany(() => FriendEntity, (friend) => friend.firstUser)
+  friendshipsAsFirstUser: FriendEntity[];
+
+  @OneToMany(() => FriendEntity, (friend) => friend.secondUser)
+  friendshipsAsSecondUser: FriendEntity[];
 }

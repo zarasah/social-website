@@ -15,12 +15,12 @@ export class FriendrequestController {
   @Get()
   @UseGuards(JwtAuthGuard)
   async getFriendRequests(@User() user: UserEntity) {
-    console.log('user', user)
+    return this.friendRequestService.getFriendRequests(user)
   }
 
   @Post()
-  async sendFriendRequest(@Body() friendRequestDto: FriendRequestDto) {
-    console.log('friendRequestDto', friendRequestDto)
-    return this.friendRequestService.sendFriendRequest(friendRequestDto);
+  @UseGuards(JwtAuthGuard)
+  async sendFriendRequest(@Body() friendRequestDto: FriendRequestDto, @User() user: UserEntity) {
+    return this.friendRequestService.sendFriendRequest(friendRequestDto, user);
   }
 }

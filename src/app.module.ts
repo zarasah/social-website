@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from "@nestjs/config";
-import * as process from "process";
 import {dbConnectionsConfig} from "./configs/ormconfig";
 import { DatabaseModule } from "./modules/database/database.module";
 import { AuthModule } from './modules/auth/auth.module';
